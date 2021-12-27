@@ -1,8 +1,6 @@
 from GramatykiGrafoweProjekt import Graph, NodeNotFoundError, CannotApplyProductionError, Node
 from GramatykiGrafoweProjekt.exceptions import TriangleNotFoundError
-from GramatykiGrafoweProjekt.project.utils import get_triangle_vertices
-
-SCALE_MOVE = 5
+from GramatykiGrafoweProjekt.project.utils import get_triangle_vertices, SCALE_MOVE
 
 
 def make_initial_graph() -> Graph:
