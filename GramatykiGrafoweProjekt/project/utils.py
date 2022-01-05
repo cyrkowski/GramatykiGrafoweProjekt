@@ -48,21 +48,15 @@ def get_triangle_vertices_for_p5(G: Graph, I: Node) -> Tuple[Node, Node, Node, N
         (node.x - SCALE_MOVE) * (node.x - SCALE_MOVE) + (node.y - SCALE_MOVE) * (node.y - SCALE_MOVE)))
     E_neighbours.remove(E1)
 
-    E2 = next(node for node in E_neighbours if node in G.get_node_neighbours(E1) and node in G.get_node_neighbours(I))
+    E5 = min(G.get_node_neighbours(E1), key=lambda node: node.x)
+    E4 = max(G.get_node_neighbours(E1), key=lambda node: node.x)
+
+    E2 = next(node for node in E_neighbours if node in G.get_node_neighbours(E5) and node in G.get_node_neighbours(I))
     E_neighbours.remove(E2)
 
-    E3 = next(node for node in E_neighbours if node in G.get_node_neighbours(E2) and node in G.get_node_neighbours(I))
+    E3 = next(node for node in E_neighbours if node in G.get_node_neighbours(E4) and node in G.get_node_neighbours(I))
     E_neighbours.remove(E3)
 
-    E4 = next(node for node in G.get_node_neighbours(E3) if node not in E_neighbours \
-              and node.x == (E1.x + E3.x) / 2 and node.y == (E1.y + E3.y) / 2)
-    E_neighbours.remove(E4)
-
-    E5 = next(node for node in G.get_node_neighbours(E4) if node not in E_neighbours \
-              and node.x == (E1.x + E2.x) / 2 and node.y == (E1.y + E2.y) / 2)
-    E_neighbours.remove(E5)
-
-    E6 = next(node for node in G.get_node_neighbours(E5) if node not in E_neighbours \
-              and node.x == (E2.x + E3.x) / 2 and node.y == (E1.y + E3.y) / 2)
+    E6 = next(node for node in E_neighbours if node in G.get_node_neighbours(E2) and node in G.get_node_neighbours(E3))
 
     return E1, E2, E3, E4, E5, E6
