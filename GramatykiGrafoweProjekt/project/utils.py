@@ -38,6 +38,7 @@ def get_triangle_vertices_for_p3(G: Graph, I: Node) -> Tuple[Node, Node, Node, N
 
     return E1, E3, E2, E4
 
+
 def get_triangle_vertices_for_p5(G: Graph, I: Node) -> Tuple[Node, Node, Node, Node, Node, Node]:
     E_neighbours = G.get_neighbors_with_label(I, 'E')
     if len(E_neighbours) != 3:
@@ -55,5 +56,13 @@ def get_triangle_vertices_for_p5(G: Graph, I: Node) -> Tuple[Node, Node, Node, N
 
     E4 = next(node for node in G.get_node_neighbours(E3) if node not in E_neighbours \
               and node.x == (E1.x + E3.x) / 2 and node.y == (E1.y + E3.y) / 2)
+    E_neighbours.remove(E4)
+
+    E5 = next(node for node in G.get_node_neighbours(E3) if node not in E_neighbours \
+              and node.x == (E1.x + E2.x) / 2 and node.y == (E1.y + E2.y) / 2)
+    E_neighbours.remove(E5)
+
+    E6 = next(node for node in G.get_node_neighbours(E3) if node not in E_neighbours \
+              and node.x == (E2.x + E3.x) / 2 and node.y == (E1.y + E3.y) / 2)
 
     return E1, E2, E3, E4, E5, E6

@@ -10,9 +10,9 @@ class MyTestCase(unittest.TestCase):
 
     def test_production_valid_graph(self):
         G = make_initial_graph()
-        # G.apply_production(P1)
+        G.apply_production(P5)
         G.display()
-        # self.assertEqual(G.get_nodes_number, 7)
+        self.assertEqual(G.get_nodes_number, 10)
 
     # def test_production_invalid_graph(self):
     #     G = Graph()
