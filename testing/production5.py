@@ -12,7 +12,7 @@ class MyTestCase(unittest.TestCase):
         G = make_initial_graph()
         G.apply_production(P5)
         G.display()
-        self.assertEqual(G.get_nodes_number, 10)
+        self.assertEqual(17, G.get_nodes_number)
 
     # def test_production_invalid_graph(self):
     #     G = Graph()

@@ -57,6 +57,6 @@ def get_triangle_vertices_for_p5(G: Graph, I: Node) -> Tuple[Node, Node, Node, N
     E3 = next(node for node in E_neighbours if node in G.get_node_neighbours(E4) and node in G.get_node_neighbours(I))
     E_neighbours.remove(E3)
 
-    E6 = next(node for node in E_neighbours if node in G.get_node_neighbours(E2) and node in G.get_node_neighbours(E3))
+    E6 = next(node for node in G.get_node_neighbours(E2) if node in G.get_node_neighbours(E2) and node in G.get_node_neighbours(E3))
 
     return E1, E2, E3, E4, E5, E6

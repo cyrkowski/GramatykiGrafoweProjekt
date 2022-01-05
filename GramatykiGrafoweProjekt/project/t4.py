@@ -35,7 +35,7 @@ def P5(G: Graph) -> None:
     level = I.level
 
     try:
-        E1, E3, E2, E4, E5, E6 = get_triangle_vertices_for_p5(G, I)
+        E1, E2, E3, E4, E5, E6 = get_triangle_vertices_for_p5(G, I)
     except TriangleNotFoundError:
         raise CannotApplyProductionError()
 
@@ -63,7 +63,7 @@ def P5(G: Graph) -> None:
     G.replace_node(I, i)
 
     G.add_nodes([
-        I1, I2,
+        I1, I2, I3, I4,
         E1, E2, E3, E4, E5, E6
     ])
 
