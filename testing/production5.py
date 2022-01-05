@@ -14,12 +14,12 @@ class MyTestCase(unittest.TestCase):
         G.display()
         self.assertEqual(17, G.get_nodes_number)
 
-    # def test_production_invalid_graph(self):
-    #     G = Graph()
-    #     i = Node(label='i', x=1, y=1, level=0)
-    #     G.add_node(i)
-    #     with self.assertRaises(CannotApplyProductionError):
-    #         G.apply_production(P1)
+    def test_production_invalid_graph(self):
+        G = Graph()
+        i = Node(label='i', x=1, y=1, level=0)
+        G.add_node(i)
+        with self.assertRaises(CannotApplyProductionError):
+            G.apply_production(P5)
 
 
 if __name__ == '__main__':
