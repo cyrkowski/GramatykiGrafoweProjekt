@@ -68,7 +68,7 @@ class GraphOperationsTest(unittest.TestCase):
             (E1, E2), (E1, E3),
             (I, E1), (I, E2), (I, E3)
         ])
-        with self.assertRaises(TriangleNotFoundError):
+        with self.assertRaises(StopIteration):
             get_triangle_vertices(G, I)
 
     def test_get_triangle_if_square_1(self):
@@ -98,8 +98,7 @@ class GraphOperationsTest(unittest.TestCase):
             (E1, E2), (E2, E3), (E3, E4), (E4, E1),
             (I, E1), (I, E2), (I, E3),
         ])
-        with self.assertRaises(TriangleNotFoundError):
-            get_triangle_vertices(G, I)
+        self.assertEqual(get_triangle_vertices(G, I), (E1, E2, E3))
 
 
 if __name__ == '__main__':
