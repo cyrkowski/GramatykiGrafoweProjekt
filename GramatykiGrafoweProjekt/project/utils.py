@@ -23,7 +23,7 @@ def get_triangle_vertices(G: Graph, I: Node) -> Tuple[Node, Node, Node]:
 
 def get_triangle_vertices_for_p3(G: Graph, I: Node) -> Tuple[Node, Node, Node, Node]:
     E_neighbours = G.get_neighbors_with_label(I, 'E')
-    if len(E_neighbours) != 3:
+    if len(E_neighbours) < 3:
         raise TriangleNotFoundError()
 
     E1 = min(E_neighbours,
