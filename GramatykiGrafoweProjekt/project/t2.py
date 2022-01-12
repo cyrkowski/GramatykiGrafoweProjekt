@@ -32,7 +32,7 @@ def P3(G: Graph) -> None:
 
     try:
         E1, E3, E2, E4 = get_triangle_vertices_for_p3(G, I)
-    except TriangleNotFoundError:
+    except (TriangleNotFoundError, NodeNotFoundError):
         raise CannotApplyProductionError()
 
     x1, y1 = E1.x, E1.y
