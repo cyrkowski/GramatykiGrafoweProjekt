@@ -91,3 +91,38 @@ def P2(G: Graph) -> None:
         (I2, E2), (I2, E3), (I2, E4),
         (E1, E2), (E1, E4), (E2, E3), (E2, E4), (E3, E4)
     ])
+
+
+def P9(G: Graph) -> None:
+    try:
+        I = G.get_first_node_with_label('I')
+    except NodeNotFoundError:
+        raise CannotApplyProductionError()
+
+    level = I.level
+
+    try:
+        E1, E3, E2 = get_triangle_vertices(G, I)
+    except TriangleNotFoundError:
+        raise CannotApplyProductionError()
+
+    x1, y1 = E1.x, E1.y
+    x2, y2 = E2.x, E2.y
+    x3, y3 = E3.x, E3.y
+
+    i = Node(label='i', x=I.x, y=I.y, level=level)
+
+    n_I = Node(label='I', x=(x1 + x2 + x3) / 3, y=(y1 + y2 + y3) / 3, level=level + 1)
+
+    n_E1 = Node(label='E', x=x1, y=y1, level=level + 1)
+    n_E2 = Node(label='E', x=x2, y=y2, level=level + 1)
+    n_E3 = Node(label='E', x=x3, y=y3, level=level + 1)
+
+    G.replace_node(I, i)
+
+    G.add_nodes([n_I, n_E1, n_E2, n_E3])
+
+    G.new_edges([
+        (n_I, n_E1), (n_I, n_E2), (n_I, n_E3),
+        (n_E1, n_E2), (n_E2, n_E3), (n_E3, n_E1)
+    ])
