@@ -67,7 +67,7 @@ def P4(G: Graph) -> None:
     G.new_edges([
         (i, I1), (i, I2),
         (I1, E1), (I1, E4), (I1, E5),
-        (I2, E2), (I2, E3), (I2, E5),
+        (I2, E2), (I2, E3), (I2, E4),
         (I3, E2), (I3, E4), (I3, E5),
         (E1, E4), (E1, E5),
         (E2, E4), (E2, E3), (E2, E5),
