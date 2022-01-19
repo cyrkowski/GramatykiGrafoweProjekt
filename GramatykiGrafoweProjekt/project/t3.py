@@ -24,10 +24,59 @@ def make_initial_graph() -> Graph:
     ])
     return G
 
+def make_triple_broken_graph() -> Graph:
+    G = Graph()
+    E1 = Node(label='E', x=SCALE_MOVE, y=SCALE_MOVE, level=0)
+    E2 = Node(label='E', x=E1.x, y=E1.y - SCALE_MOVE, level=0)
+    E3 = Node(label='E', x=E1.x + SCALE_MOVE, y=E1.y + SCALE_MOVE, level=0)
+    E4 = Node(label='E', x=(E1.x + E3.x) / 2, y=(E1.y + E3.y) / 2, level=0)
+    E5 = Node(label='E', x=(E1.x + E2.x) / 2, y=(E1.y + E2.y) / 2, level=0)
+    E6 = Node(label='E', x=(E2.x + E3.x) / 2, y=(E2.y + E3.y) / 2, level=0)
+
+    medium_x = (E1.x + E3.x) / 2
+    medium_y = (E1.y + E5.y) / 2
+
+    I = Node(label='I', x=(E1.x + medium_x) / 2, y=(E1.y + medium_y) / 2, level=0)
+
+    G.add_nodes([I, E1, E2, E3, E4, E5, E6])
+
+    G.new_edges([
+        (I, E1), (I, E2), (I, E3),
+        (E1, E4), (E1, E5), (E4, E3), (E5, E2), (E2, E6), (E3, E6)
+    ])
+    return G
+
+def make_invalid_graph() ->Graph:
+    G = Graph()
+    E1 = Node(label='E', x=SCALE_MOVE, y=SCALE_MOVE, level=0)
+    E2 = Node(label='E', x=E1.x, y=E1.y - SCALE_MOVE, level=0)
+    E3 = Node(label='E', x=E1.x + SCALE_MOVE, y=E1.y + SCALE_MOVE, level=0)
+    E4 = Node(label='E', x=(E1.x + E3.x) * 2/5, y=(E1.y + E3.y) * 3/5, level=0)
+    E5 = Node(label='E', x=(E1.x + E2.x) * 2/5, y=(E1.y + E2.y) * 3/5, level=0)
+
+    medium_x = (E1.x + E3.x) / 2
+    medium_y = (E1.y + E5.y) / 2
+
+    I = Node(label='I', x=(E1.x + medium_x) / 2, y=(E1.y + medium_y) / 2, level=0)
+
+    G.add_nodes([I, E1, E2, E3, E4, E5])
+
+    G.new_edges([
+        (I, E1), (I, E2), (I, E3),
+        (E1, E4), (E1, E5), (E4, E3), (E5, E2), (E2, E3)
+    ])
+    return G
 
 def P4(G: Graph) -> None:
     try:
-        I = G.get_first_node_with_label('I')
+        nodes_list=G.get_nodes()
+        I="start"
+        for node in nodes_list:
+            if node.label == 'I':
+                if len(G.get_neighbors_with_label(node, "E"))==3:
+                    I=node
+        if I=='start':
+            raise CannotApplyProductionError()
     except NodeNotFoundError:
         raise CannotApplyProductionError()
 
@@ -67,7 +116,7 @@ def P4(G: Graph) -> None:
     G.new_edges([
         (i, I1), (i, I2),
         (I1, E1), (I1, E4), (I1, E5),
-        (I2, E2), (I2, E3), (I2, E5),
+        (I2, E2), (I2, E3), (I2, E4),
         (I3, E2), (I3, E4), (I3, E5),
         (E1, E4), (E1, E5),
         (E2, E4), (E2, E3), (E2, E5),
