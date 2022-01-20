@@ -12,6 +12,11 @@ def make_initial_graph() -> Graph:
     E5 = Node(label='E', x=(E1.x + E2.x) / 2, y=(E1.y + E2.y) / 2, level=0)
     E6 = Node(label='E', x=(E2.x + E3.x) / 2, y=(E2.y + E3.y) / 2, level=0)
 
+    if E4.x != (E1.x + E3.x) / 2 or E4.y != (E1.y + E3.y) / 2 \
+            or E5.x != (E1.x + E2.x) / 2 or E5.y != (E1.y + E2.y) / 2 \
+            or E6.x != (E2.x + E3.x) / 2 or E6.y != (E2.y + E3.y) / 2:
+        raise CannotApplyProductionError('Incorrect node position')
+
     medium_x = (E1.x + E3.x) / 2
     medium_y = (E1.y + E6.y) / 2
 
@@ -28,7 +33,14 @@ def make_initial_graph() -> Graph:
 
 def P5(G: Graph) -> None:
     try:
-        I = G.get_first_node_with_label('I')
+        nodes_list = G.get_nodes()
+        I = "start"
+        for node in nodes_list:
+            if node.label == 'I':
+                if len(G.get_neighbors_with_label(node, "E")) == 3:
+                    I = node
+        if I == 'start':
+            raise CannotApplyProductionError()
     except NodeNotFoundError:
         raise CannotApplyProductionError()
 
