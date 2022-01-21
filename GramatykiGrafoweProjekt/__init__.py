@@ -67,6 +67,12 @@ class Graph:
     def get_nodes(self) -> NodeView:
         return self._Graph.nodes
 
+    def get_nodes_with_label(self, label: str) -> Iterable[Node]:
+        found = [node for node in self.get_nodes if node.label == label]
+        if not found:
+            raise NodeNotFoundError(f'Node with label "{label}" not found')
+        return found
+
     @property
     def get_nodes_number(self) -> int:
         return self._Graph.number_of_nodes()

@@ -1,6 +1,6 @@
 import unittest
 from GramatykiGrafoweProjekt import Graph, CannotApplyProductionError, Node
-from GramatykiGrafoweProjekt.project.t1 import P1, P2, P9, make_initial_graph
+from GramatykiGrafoweProjekt.project.t1 import P1, P2, P9, P12, make_initial_graph
 
 
 class Production9Test(unittest.TestCase):
