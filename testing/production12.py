@@ -19,9 +19,9 @@ class Production12Test(unittest.TestCase):
     def test_removed_one_node(self):
         G = make_initial_graph()
         G.apply_productions([P1, P9, P9])
-        G.display()
         I = G.get_first_node_with_label('I')
         G.remove_node(I)
+        G.display()
         with self.assertRaises(CannotApplyProductionError):
             G.apply_production(P12)
 
